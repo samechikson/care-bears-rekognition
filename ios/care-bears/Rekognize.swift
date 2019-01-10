@@ -106,7 +106,7 @@ class Rekognize {
             }
             
             if let response = task.result {
-                if let likelyhood = response.faceMatches?.first!.face!.externalImageId! {
+                if let likelyhood = response.faceMatches?.first?.face!.externalImageId! {
                     print("Most likely: \(likelyhood)")
                     
                     let confidence = response.faceMatches!.first!.similarity!
@@ -116,7 +116,7 @@ class Rekognize {
                     formatter.maximumFractionDigits = 2
                     
                     DispatchQueue.main.async {
-                        self.delegate?.didRecognizeFace(self, name: likelyhood, confidence: Double(truncating: confidence))
+                        self.delegate?.didRecognizeFace(self, name: self.formatName(nameId: likelyhood), confidence: Double(truncating: confidence))
                     }
                 } else {
                     print("Could not rekognize faces")
@@ -125,5 +125,13 @@ class Rekognize {
             }
             return nil;
         })
+    }
+    
+    func formatName(nameId: String) -> String {
+        var capitalizedName: [String] = nameId.components(separatedBy: "-")
+        
+        capitalizedName = capitalizedName.map { w in w.capitalized }
+        
+        return capitalizedName.joined(separator: " ")
     }
 }
