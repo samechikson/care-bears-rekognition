@@ -12,5 +12,7 @@ protocol RekognizeDelegate {
     
     func didRecognizeFace(_ sender: Rekognize, name: String, confidence: Double)
     
+    func didNotRecognizeFace(_ sender: Rekognize)
+    
     func didUploadToS3(_ sender: Rekognize)
 }

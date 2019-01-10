@@ -64,7 +64,7 @@ class Rekognize {
         }
         
         s3.uploadData(imageData,
-                      bucket: "care-bears-faces",
+                      bucket: "care-bears-faces-bucket",
                       key: "rekognition-image.png",
                       contentType: "image/png",
                       expression: expression,
@@ -88,7 +88,7 @@ class Rekognize {
     func rekognizeFaces() {
         
         let s3Image = AWSRekognitionS3Object()
-        s3Image?.bucket = "care-bears-faces"
+        s3Image?.bucket = "care-bears-faces-bucket"
         s3Image?.name = "rekognition-image.png"
         
         let rekognitionImage = AWSRekognitionImage()
@@ -102,25 +102,25 @@ class Rekognize {
         rekognition.searchFaces(byImage: req).continueWith(block: { (task) -> Any? in
             if let error = task.error {
                 print("Error: \(error.localizedDescription)")
+                self.delegate?.didNotRecognizeFace(self)
             }
             
             if let response = task.result {
-                let likelyhood = response.faceMatches!.first!.face!.externalImageId!
-                print("Most likely: \(likelyhood)")
-                
-                let confidence = response.faceMatches!.first!.similarity!
-                print("Confidence: \(confidence.stringValue)%")
-                
-                let formatter = NumberFormatter()
-                formatter.maximumFractionDigits = 2
-                
-                DispatchQueue.main.async {
-                    self.delegate?.didRecognizeFace(self, name: likelyhood, confidence: Double(truncating: confidence))
-//                    self.rekognitionResultName.text = likelyhood
-//                    self.rekognitionResultName.isHidden = false
-//                    self.rekognitionResultConfidence.text = "\(formatter.string(from: confidence) ?? "0")%"
-//                    self.rekognitionResultConfidence.isHidden = false
-//                    self.hideLoading()
+                if let likelyhood = response.faceMatches?.first!.face!.externalImageId! {
+                    print("Most likely: \(likelyhood)")
+                    
+                    let confidence = response.faceMatches!.first!.similarity!
+                    print("Confidence: \(confidence.stringValue)%")
+                    
+                    let formatter = NumberFormatter()
+                    formatter.maximumFractionDigits = 2
+                    
+                    DispatchQueue.main.async {
+                        self.delegate?.didRecognizeFace(self, name: likelyhood, confidence: Double(truncating: confidence))
+                    }
+                } else {
+                    print("Could not rekognize faces")
+                    self.delegate?.didNotRecognizeFace(self)
                 }
             }
             return nil;

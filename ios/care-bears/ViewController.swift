@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var faceDetection: FaceDetect!
     var rekognition: Rekognize!
+    var lambda: Lambda!
     
     let tasks: [Task] = [
         Task(title: "Level 1", timeLeft: 0),
@@ -52,6 +53,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.rekognition = Rekognize()
         self.rekognition.delegate = self
+        
+        self.lambda = Lambda()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -119,6 +122,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.popoverVC.dismiss(animated: true, completion: nil)
         self.animateDetailsIn()
+        self.lambda.checkIn()
+    }
+    
+    func didNotRecognizeFace(_ sender: Rekognize) {
+        DispatchQueue.main.async {
+            self.popoverLabel.text = "Could not Identify you"
+        }
     }
     
     @IBAction func logIn(_ sender: Any) {

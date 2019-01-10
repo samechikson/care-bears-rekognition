@@ -9,6 +9,7 @@ target 'care-bears' do
   pod 'AWSRekognition'
   pod 'AWSS3'
   pod 'AWSCore'
+  pod 'AWSLambda'
 
   target 'care-bearsTests' do
     inherit! :search_paths
