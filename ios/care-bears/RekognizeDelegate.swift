@@ -10,7 +10,7 @@ import UIKit
 
 protocol RekognizeDelegate {
     
-    func didRecognizeFace(_ sender: RekognizeController, name: String, confidence: Double)
+    func didRecognizeFace(_ sender: Rekognize, name: String, confidence: Double)
     
-    func didUploadToS3(_ sender: RekognizeController)
+    func didUploadToS3(_ sender: Rekognize)
 }

@@ -22,7 +22,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var popoverLabel: UILabel!
     
     var faceDetection: FaceDetect!
-    var rekognition: RekognizeController!
+    var rekognition: Rekognize!
     
     let tasks: [Task] = [
         Task(title: "Level 1", timeLeft: 0),
@@ -50,7 +50,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.initPopoverVC()
         
-        self.rekognition = RekognizeController()
+        self.rekognition = Rekognize()
         self.rekognition.delegate = self
     }
     
@@ -109,11 +109,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.rekognition.saveImageToS3(image: selfie)
     }
     
-    func didUploadToS3(_ sender: RekognizeController) {
+    func didUploadToS3(_ sender: Rekognize) {
         print("Uploaded image to S3! in ViewController.swift")
     }
     
-    func didRecognizeFace(_ sender: RekognizeController, name: String, confidence: Double) {
+    func didRecognizeFace(_ sender: Rekognize, name: String, confidence: Double) {
         print("Recognized \(name) with confidence \(confidence)")
         self.userName.text = name
         

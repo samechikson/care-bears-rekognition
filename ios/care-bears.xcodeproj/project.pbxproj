@@ -12,7 +12,7 @@
 		7473F9CF21DAAADA00167131 /* RekognizeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7473F9CE21DAAADA00167131 /* RekognizeDelegate.swift */; };
 		74993B3921D3E6BA005968A4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3821D3E6BA005968A4 /* Task.swift */; };
 		74993B3B21D66735005968A4 /* FaceDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3A21D66735005968A4 /* FaceDetect.swift */; };
-		74993B3D21D667C8005968A4 /* RekognizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3C21D667C8005968A4 /* RekognizeController.swift */; };
+		74993B3D21D667C8005968A4 /* Rekognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3C21D667C8005968A4 /* Rekognize.swift */; };
 		74993B3F21D66C73005968A4 /* FaceDetectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3E21D66C73005968A4 /* FaceDetectDelegate.swift */; };
 		74FFB1AF21D13827003AC172 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FFB1AE21D13827003AC172 /* AppDelegate.swift */; };
 		74FFB1B121D13827003AC172 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FFB1B021D13827003AC172 /* ViewController.swift */; };
@@ -50,7 +50,7 @@
 		7473F9CE21DAAADA00167131 /* RekognizeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RekognizeDelegate.swift; sourceTree = "<group>"; };
 		74993B3821D3E6BA005968A4 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		74993B3A21D66735005968A4 /* FaceDetect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetect.swift; sourceTree = "<group>"; };
-		74993B3C21D667C8005968A4 /* RekognizeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RekognizeController.swift; sourceTree = "<group>"; };
+		74993B3C21D667C8005968A4 /* Rekognize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rekognize.swift; sourceTree = "<group>"; };
 		74993B3E21D66C73005968A4 /* FaceDetectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectDelegate.swift; sourceTree = "<group>"; };
 		74FFB1AB21D13827003AC172 /* care-bears.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "care-bears.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74FFB1AE21D13827003AC172 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 				74FFB1B221D13827003AC172 /* Main.storyboard */,
 				74993B3A21D66735005968A4 /* FaceDetect.swift */,
 				74993B3E21D66C73005968A4 /* FaceDetectDelegate.swift */,
-				74993B3C21D667C8005968A4 /* RekognizeController.swift */,
+				74993B3C21D667C8005968A4 /* Rekognize.swift */,
 				7473F9CE21DAAADA00167131 /* RekognizeDelegate.swift */,
 				74993B3821D3E6BA005968A4 /* Task.swift */,
 				74FFB1DC21D1AF68003AC172 /* Media.xcassets */,
@@ -396,7 +396,7 @@
 			files = (
 				7473F9CF21DAAADA00167131 /* RekognizeDelegate.swift in Sources */,
 				74993B3921D3E6BA005968A4 /* Task.swift in Sources */,
-				74993B3D21D667C8005968A4 /* RekognizeController.swift in Sources */,
+				74993B3D21D667C8005968A4 /* Rekognize.swift in Sources */,
 				74993B3B21D66735005968A4 /* FaceDetect.swift in Sources */,
 				74FFB1B121D13827003AC172 /* ViewController.swift in Sources */,
 				74993B3F21D66C73005968A4 /* FaceDetectDelegate.swift in Sources */,

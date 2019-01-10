@@ -10,7 +10,7 @@ import UIKit
 import AWSRekognition
 import AWSS3
 
-class RekognizeController {
+class Rekognize {
     
     var rekognition: AWSRekognition!
     var s3: AWSS3TransferUtility!
