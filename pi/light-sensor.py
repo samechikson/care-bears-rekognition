@@ -1,10 +1,14 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BOARD)
+from utils import getLog
+
+log = getLog('light_sensor')
+
+GPIO.setmode(GPIO.BCM)
 
 #define the pin that goes to the circuit
-pin_to_circuit = 7
+pin_to_circuit = 4
 
 def rc_time(pin_to_circuit):
     count = 0
@@ -33,10 +37,9 @@ if __name__ == '__main__':
                 ratio = last / current
             except ZeroDivisionError:
                 ratio = 0
-            if ratio > 4.5:
-                print(current, last)
-                print('Switch')
-                time.sleep(1.5)
+            if ratio > 3:
+                log.info('Light switched')
+                break
     except KeyboardInterrupt:
         pass
     finally:
