@@ -24,14 +24,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var faceDetection: FaceDetect!
     var rekognition: Rekognize!
     var lambda: Lambda!
-    
-    let tasks: [Task] = [
-        Task(title: "Level 1", timeLeft: 0),
-        Task(title: "Level 2", timeLeft: (86400/5)*1),
-        Task(title: "Level 3", timeLeft: (86400/5)*2),
-        Task(title: "Level 4", timeLeft: (86400/5)*3),
-        Task(title: "Level 5", timeLeft: (86400/5)*4)
-    ]
+    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.166:5000/handsanitizer")
+//    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.228:3000/handsanitizer")
+
+    var tasks: [Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +63,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func initGauge() {
         self.gauge.path = UIBezierPath(rect: CGRect(x: 0, y: -150, width: 10, height: 300)).cgPath
-        self.gauge.fillColor = self.tasks[0].color.cgColor
-        self.gauge.shadowColor = self.tasks[0].color.cgColor
         self.gauge.shadowOffset = .zero
         self.gauge.shadowRadius = 5
         self.gauge.shadowOpacity = 0.85
@@ -140,6 +134,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func animateDetailsIn() {
+        self.lambda.fetchTasks { (tasks) in
+            self.tasks = tasks
+            DispatchQueue.main.async {
+                self.tasksPicker.reloadAllComponents()
+                self.gauge.fillColor = self.tasks[0].color.cgColor
+                self.gauge.shadowColor = self.tasks[0].color.cgColor
+            }
+        }
+        
         UIView.animate(withDuration: 1, animations: {
             self.timeDisplay.frame.origin.x -= 250
             self.timeDisplay.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
@@ -148,6 +151,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.tasksPicker.isHidden = false
             self.isDetailView = true
             self.userName.isHidden = false
+            self.handSanitizerRPi.notifyLogIn()
         }
         UIView.animate(withDuration: 0.5, delay: 1, options: [], animations: {
             self.gaugeView.alpha = 1

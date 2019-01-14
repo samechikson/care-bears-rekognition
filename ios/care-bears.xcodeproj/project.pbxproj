@@ -15,6 +15,7 @@
 		74993B3B21D66735005968A4 /* FaceDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3A21D66735005968A4 /* FaceDetect.swift */; };
 		74993B3D21D667C8005968A4 /* Rekognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3C21D667C8005968A4 /* Rekognize.swift */; };
 		74993B3F21D66C73005968A4 /* FaceDetectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74993B3E21D66C73005968A4 /* FaceDetectDelegate.swift */; };
+		74D4AF5321EA645B00423E61 /* RaspberryPiConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4AF5221EA645B00423E61 /* RaspberryPiConnect.swift */; };
 		74FFB1AF21D13827003AC172 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FFB1AE21D13827003AC172 /* AppDelegate.swift */; };
 		74FFB1B121D13827003AC172 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FFB1B021D13827003AC172 /* ViewController.swift */; };
 		74FFB1B421D13827003AC172 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74FFB1B221D13827003AC172 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		74993B3A21D66735005968A4 /* FaceDetect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetect.swift; sourceTree = "<group>"; };
 		74993B3C21D667C8005968A4 /* Rekognize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rekognize.swift; sourceTree = "<group>"; };
 		74993B3E21D66C73005968A4 /* FaceDetectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectDelegate.swift; sourceTree = "<group>"; };
+		74D4AF5221EA645B00423E61 /* RaspberryPiConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaspberryPiConnect.swift; sourceTree = "<group>"; };
 		74FFB1AB21D13827003AC172 /* care-bears.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "care-bears.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74FFB1AE21D13827003AC172 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74FFB1B021D13827003AC172 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				74FFB1B021D13827003AC172 /* ViewController.swift */,
 				74FFB1B221D13827003AC172 /* Main.storyboard */,
 				74993B3A21D66735005968A4 /* FaceDetect.swift */,
+				74D4AF5221EA645B00423E61 /* RaspberryPiConnect.swift */,
 				74993B3E21D66C73005968A4 /* FaceDetectDelegate.swift */,
 				74993B3C21D667C8005968A4 /* Rekognize.swift */,
 				745983BA21E79A6D00B38CB3 /* Lambda.swift */,
@@ -400,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				745983BB21E79A6D00B38CB3 /* Lambda.swift in Sources */,
+				74D4AF5321EA645B00423E61 /* RaspberryPiConnect.swift in Sources */,
 				7473F9CF21DAAADA00167131 /* RekognizeDelegate.swift in Sources */,
 				74993B3921D3E6BA005968A4 /* Task.swift in Sources */,
 				74993B3D21D667C8005968A4 /* Rekognize.swift in Sources */,
@@ -586,7 +590,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q4M6DQ9WM;
 				INFOPLIST_FILE = "care-bears/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "samechikson.care-bears";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -603,7 +610,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q4M6DQ9WM;
 				INFOPLIST_FILE = "care-bears/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "samechikson.care-bears";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -620,7 +630,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q4M6DQ9WM;
 				INFOPLIST_FILE = "care-bearsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "samechikson.care-bearsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -638,7 +652,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q4M6DQ9WM;
 				INFOPLIST_FILE = "care-bearsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "samechikson.care-bearsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -655,7 +673,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q4M6DQ9WM;
 				INFOPLIST_FILE = "care-bearsUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "samechikson.care-bearsUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -672,7 +694,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q4M6DQ9WM;
 				INFOPLIST_FILE = "care-bearsUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "samechikson.care-bearsUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

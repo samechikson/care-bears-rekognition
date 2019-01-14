@@ -529,13 +529,23 @@ class FaceDetect: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
             return;
         }
         
+//        print(faceObservation.boundingBox.height, faceObservation.boundingBox.width)
 //        print(faceObservation.boundingBox.midX, ", ", faceObservation.boundingBox.midY)
         
         // See if face is towards the middle of the screen
-        if (faceObservation.boundingBox.midX > 0.2 && faceObservation.boundingBox.midX < 0.8 && faceObservation.boundingBox.midY > 0.2 && faceObservation.boundingBox.midY < 0.8) {
-
+        if (self.isFaceCenteredAndLarge(faceObservation: faceObservation)) {
             self.captureImage()
         }
+    }
+    
+    func isFaceCenteredAndLarge(faceObservation: VNFaceObservation) -> Bool {
+        return
+            faceObservation.boundingBox.midX > 0.2 &&
+               faceObservation.boundingBox.midX < 0.8 &&
+               faceObservation.boundingBox.midY > 0.2 &&
+               faceObservation.boundingBox.midY < 0.8
+//               faceObservation.boundingBox.height > 0.35 &&
+//               faceObservation.boundingBox.width > 0.5
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {

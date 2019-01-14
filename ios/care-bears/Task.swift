@@ -36,12 +36,39 @@ class Task {
         self.calcColor()
     }
     
+    init?(json: [String: Any]) {
+        print(json)
+        guard let title = json["name"] as? String,
+            let targetTime = DateFormatter().date(fromISOString: json["time_targeted_first"] as! String)
+            else {
+                return nil
+        }
+        
+        self.title = title
+        self.dueDate = targetTime
+        self.timeLeft = -targetTime.timeIntervalSinceNow
+        self.calcColor()
+    }
+    
     func calcColor() {
         // one day in seconds = 86400
         let fraction = (self.timeLeft / 86400)
-        let index = Int((fraction * 5).rounded(.down))
+        var index = Int((fraction * 5).rounded(.down))
+        if index > 4 { index = 4 }
+        if index < 0 { index = 0 }
         self.color = possibleColors[index]
     }
     
     
 }
+
+extension DateFormatter {
+    func date(fromISOString dateString: String) -> Date? {
+        // Dates look like: "2014-12-10T16:44:31.486000Z"
+        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SZ"
+        self.timeZone = TimeZone(abbreviation: "UTC")
+        self.locale = Locale(identifier: "en_US_POSIX")
+        return self.date(from: dateString)
+    }
+}
+
