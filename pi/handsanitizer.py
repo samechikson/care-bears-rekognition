@@ -12,6 +12,8 @@ app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(21, GPIO.OUT)
+GPIO.setup(20, GPIO.OUT)
+GPIO.setup(16, GPIO.OUT)
 
 pin_to_circuit = 4 # pin for light sensor
 
@@ -32,10 +34,14 @@ def handsanitizer():
 def ledOn():
     log.info('LED on')
     GPIO.output(21, GPIO.HIGH)
+    GPIO.output(20, GPIO.HIGH)
+    GPIO.output(16, GPIO.HIGH)
 
 def ledOff():
     log.info('LED off')
     GPIO.output(21, GPIO.LOW)
+    GPIO.output(20, GPIO.LOW)
+    GPIO.output(16, GPIO.LOW)
 
 def rc_time(pin_to_circuit):
     count = 0
