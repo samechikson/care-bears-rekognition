@@ -40,11 +40,11 @@
                                             <action selector="logIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eV9-aW-Mce"/>
                                         </connections>
                                     </button>
-                                    <pickerView contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzP-GJ-4iq">
-                                        <rect key="frame" x="644" y="276" width="325" height="216"/>
+                                    <pickerView contentMode="scaleAspectFit" horizontalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="lzP-GJ-4iq">
+                                        <rect key="frame" x="644" y="276" width="320" height="216"/>
                                     </pickerView>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UlU-U1-gve">
-                                        <rect key="frame" x="507" y="234" width="10" height="300"/>
+                                        <rect key="frame" x="388" y="234" width="248" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIc-mP-Qrm">
@@ -64,8 +64,9 @@
                                 <color key="backgroundColor" red="0.052833052776426519" green="0.12800931981462466" blue="0.21495435504138771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="nrq-pf-GNl" firstAttribute="centerX" secondItem="mXn-1g-xXC" secondAttribute="centerX" id="30W-dA-ZXd"/>
-                                    <constraint firstAttribute="trailing" secondItem="lzP-GJ-4iq" secondAttribute="trailing" constant="60" id="7Rj-A6-Qmg"/>
+                                    <constraint firstAttribute="trailing" secondItem="lzP-GJ-4iq" secondAttribute="trailing" constant="60" id="7Rj-A6-Qmg" userLabel="trailing = Tasks Picker.trailing + 80"/>
                                     <constraint firstItem="lzP-GJ-4iq" firstAttribute="centerY" secondItem="mXn-1g-xXC" secondAttribute="centerY" id="CTD-LZ-FGZ"/>
+                                    <constraint firstItem="lzP-GJ-4iq" firstAttribute="leading" secondItem="UlU-U1-gve" secondAttribute="trailing" constant="8" id="XKX-xK-whF"/>
                                     <constraint firstItem="jIc-mP-Qrm" firstAttribute="top" secondItem="mXn-1g-xXC" secondAttribute="top" constant="60" id="mp5-Gz-l96"/>
                                     <constraint firstAttribute="trailing" secondItem="jIc-mP-Qrm" secondAttribute="trailing" constant="50" id="pyZ-zy-gRC"/>
                                     <constraint firstItem="nrq-pf-GNl" firstAttribute="top" secondItem="mXn-1g-xXC" secondAttribute="top" constant="50" id="rS2-lV-6Oe"/>

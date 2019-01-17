@@ -6,12 +6,14 @@ PODS:
     - AWSCore (= 2.7.3)
   - AWSS3 (2.7.3):
     - AWSCore (= 2.7.3)
+  - Swifter (1.4.5)
 
 DEPENDENCIES:
   - AWSCore
   - AWSLambda
   - AWSRekognition
   - AWSS3
+  - Swifter (~> 1.4.5)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -19,13 +21,15 @@ SPEC REPOS:
     - AWSLambda
     - AWSRekognition
     - AWSS3
+    - Swifter
 
 SPEC CHECKSUMS:
   AWSCore: 02d9ae2b6c2aaba6077fee2b09b0a62fb9b80282
   AWSLambda: 5bbc3175e025c7ea1fb29f227710ae36e3cf8697
   AWSRekognition: 08926c7cfd3d9e0a36ab6773777454f063337e1e
   AWSS3: 96488eeaae6059d5252a7065b2010f846bdafe14
+  Swifter: eb2bc1d192a1c09169c7fefd01971565fa940521
 
-PODFILE CHECKSUM: ca7a4e150338c6c216e2d4f2df3391828d88bbff
+PODFILE CHECKSUM: 826045057049ecd31fb5c39d18fca62421400d77
 
 COCOAPODS: 1.5.0

@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, FaceDetectDelegate, RekognizeDelegate {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, FaceDetectDelegate, RekognizeDelegate, WebServerDelegate {
+
     @IBOutlet weak var timeDisplay: UILabel!
     @IBOutlet weak var backgroundTintView: UIView!
     @IBOutlet weak var tasksPicker: UIPickerView!
@@ -26,8 +27,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var lambda: Lambda!
     let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.166:5000/handsanitizer")
 //    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.228:3000/handsanitizer")
+    
+    var webServer: WebServer!
 
-    var tasks: [Task] = []
+    var tasks: [Task] = [
+        Task(title: "IV Line Change", dueDate: Date().addingTimeInterval(1000)),
+        Task(title: "IV Line Change 2", dueDate: Date().addingTimeInterval(2000)),
+        Task(title: "IV Line Change 3", dueDate: Date().addingTimeInterval(2000))
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +58,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.rekognition.delegate = self
         
         self.lambda = Lambda()
+        
+        self.webServer = WebServer()
+        self.webServer.delegate = self
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -125,6 +135,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
+    func taskDone(_ sender: WebServer) {
+        self.tasksPicker.selectRow(self.tasksPicker.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
+    }
+    
     @IBAction func logIn(_ sender: Any) {
         if (self.isDetailView) {
             animatDetailsOut()
@@ -134,15 +148,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func animateDetailsIn() {
-        self.lambda.fetchTasks { (tasks) in
-            self.tasks = tasks
-            DispatchQueue.main.async {
-                self.tasksPicker.reloadAllComponents()
-                self.gauge.fillColor = self.tasks[0].color.cgColor
-                self.gauge.shadowColor = self.tasks[0].color.cgColor
-            }
-        }
-        
+//        self.lambda.fetchTasks { (tasks) in
+//            self.tasks = tasks
+//            DispatchQueue.main.async {
+//                self.tasksPicker.reloadAllComponents()
+//                self.gauge.fillColor = self.tasks[0].color.cgColor
+//                self.gauge.shadowColor = self.tasks[0].color.cgColor
+//            }
+//        }
+//
         UIView.animate(withDuration: 1, animations: {
             self.timeDisplay.frame.origin.x -= 250
             self.timeDisplay.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
@@ -211,9 +225,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         let titleData = tasks[row].title
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 44), NSAttributedString.Key.foregroundColor:UIColor.white])
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34), NSAttributedString.Key.foregroundColor:UIColor.white])
         pickerLabel.attributedText = myTitle
         pickerLabel.textAlignment = .left
+        pickerLabel.adjustsFontSizeToFitWidth = true
         return pickerLabel
     }
     
