@@ -11,7 +11,7 @@ app = Flask(__name__)
 # set up IO pins for led
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(21, GPIO.OUT)
+#GPIO.setup(21, GPIO.OUT)
 GPIO.setup(20, GPIO.OUT)
 GPIO.setup(16, GPIO.OUT)
 
@@ -33,13 +33,13 @@ def handsanitizer():
 
 def ledOn():
     log.info('LED on')
-    GPIO.output(21, GPIO.HIGH)
+    #GPIO.output(21, GPIO.HIGH)
     GPIO.output(20, GPIO.HIGH)
     GPIO.output(16, GPIO.HIGH)
 
 def ledOff():
     log.info('LED off')
-    GPIO.output(21, GPIO.LOW)
+    #GPIO.output(21, GPIO.LOW)
     GPIO.output(20, GPIO.LOW)
     GPIO.output(16, GPIO.LOW)
 
@@ -61,18 +61,26 @@ def rc_time(pin_to_circuit):
 
 def checkLight():
     try:
-        current = 8
-        last = 8
+        current = 30
+        last = 30
+        count = 0
         while True:
-            last = current
-            current = round(rc_time(pin_to_circuit), -1)
-            try:
-                ratio = last / current
-            except ZeroDivisionError:
-                ratio = 0
-            if ratio > 2:
-                log.info('Light switched')
-                break
+            current = rc_time(pin_to_circuit) #int(5 * round(float(rc_time(pin_to_circuit)/5)))
+            if count == 3:
+                #current = round(rc_time(pin_to_circuit), -1)
+                try:
+                    ratio = last / current
+                except ZeroDivisionError:
+                    ratio = 1
+                print(current, ratio)
+                if current - last >= 15: #  ratio < 1 and ratio > .5:
+                    print(last, current, ratio)
+                    log.info('Light switched')
+                    break
+                count = 0
+                last = current
+            else:
+                count += 1
     except KeyboardInterrupt:
         pass
     finally:
