@@ -29,6 +29,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var lambda: Lambda!
     let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.163.194:5000/handsanitizer")
 //    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.228:3000/handsanitizer")
+    @IBOutlet weak var hospitalLogo: UIImageView!
+    var hospitalLogoInitialPosition: CGPoint!
     
     var webServer: WebServer!
 
@@ -66,6 +68,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.webServer.delegate = self
         
         self.displayDateFormatter.dateFormat = self.displayDateFormatString
+        
+        self.hospitalLogoInitialPosition = CGPoint(x: self.hospitalLogo.center.x, y: self.hospitalLogo.center.y)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -159,6 +163,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.timeDisplay.frame.origin.x -= 250
             self.timeDisplay.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             self.backgroundTintView.alpha = 1
+            
+            self.hospitalLogo.center = CGPoint(x: 200, y: 80)
         }) { (_) in
             self.tasksPicker.isHidden = false
             self.isDetailView = true
@@ -187,6 +193,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.timeDisplay.center.x = self.view.center.x
             self.timeDisplay.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.backgroundTintView.alpha = 0.85
+            
+            self.hospitalLogo.center = self.hospitalLogoInitialPosition
         })
     }
     

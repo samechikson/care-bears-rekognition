@@ -41,10 +41,13 @@
                                         </connections>
                                     </button>
                                     <pickerView contentMode="scaleAspectFit" horizontalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="lzP-GJ-4iq">
-                                        <rect key="frame" x="644" y="276" width="320" height="216"/>
+                                        <rect key="frame" x="604" y="276" width="360" height="216"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="360" id="So1-wg-2zH"/>
+                                        </constraints>
                                     </pickerView>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UlU-U1-gve">
-                                        <rect key="frame" x="388" y="234" width="248" height="300"/>
+                                        <rect key="frame" x="428" y="234" width="168" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIc-mP-Qrm">
@@ -60,6 +63,9 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Charlotte Hospital logo" translatesAutoresizingMaskIntoConstraints="NO" id="c4s-7T-uBi">
+                                        <rect key="frame" x="373.5" y="164" width="277" height="79"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.052833052776426519" green="0.12800931981462466" blue="0.21495435504138771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -67,6 +73,8 @@
                                     <constraint firstAttribute="trailing" secondItem="lzP-GJ-4iq" secondAttribute="trailing" constant="60" id="7Rj-A6-Qmg" userLabel="trailing = Tasks Picker.trailing + 80"/>
                                     <constraint firstItem="lzP-GJ-4iq" firstAttribute="centerY" secondItem="mXn-1g-xXC" secondAttribute="centerY" id="CTD-LZ-FGZ"/>
                                     <constraint firstItem="lzP-GJ-4iq" firstAttribute="leading" secondItem="UlU-U1-gve" secondAttribute="trailing" constant="8" id="XKX-xK-whF"/>
+                                    <constraint firstItem="c4s-7T-uBi" firstAttribute="top" secondItem="nrq-pf-GNl" secondAttribute="bottom" constant="70" id="ePd-iH-HWP"/>
+                                    <constraint firstItem="c4s-7T-uBi" firstAttribute="centerX" secondItem="mXn-1g-xXC" secondAttribute="centerX" id="ha3-nU-lZC"/>
                                     <constraint firstItem="jIc-mP-Qrm" firstAttribute="top" secondItem="mXn-1g-xXC" secondAttribute="top" constant="60" id="mp5-Gz-l96"/>
                                     <constraint firstAttribute="trailing" secondItem="jIc-mP-Qrm" secondAttribute="trailing" constant="50" id="pyZ-zy-gRC"/>
                                     <constraint firstItem="nrq-pf-GNl" firstAttribute="top" secondItem="mXn-1g-xXC" secondAttribute="top" constant="50" id="rS2-lV-6Oe"/>
@@ -92,6 +100,7 @@
                         <outlet property="backgroundTintView" destination="mXn-1g-xXC" id="UtT-qD-hNE"/>
                         <outlet property="eyeScannerButton" destination="nrq-pf-GNl" id="kGh-0V-VSM"/>
                         <outlet property="gaugeView" destination="UlU-U1-gve" id="Jiw-cm-D6m"/>
+                        <outlet property="hospitalLogo" destination="c4s-7T-uBi" id="Hco-fs-kN8"/>
                         <outlet property="tasksPicker" destination="lzP-GJ-4iq" id="5JQ-wy-J2R"/>
                         <outlet property="timeDisplay" destination="Iy7-WA-7mr" id="mEM-PW-Mq0"/>
                         <outlet property="userName" destination="jIc-mP-Qrm" id="wpn-c3-7YM"/>
@@ -101,34 +110,9 @@
             </objects>
             <point key="canvasLocation" x="19.921875" y="23.4375"/>
         </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="m6z-yw-lHq">
-            <objects>
-                <viewController storyboardIdentifier="detailViewController" id="NUO-Pd-eN4" customClass="DetailViewController" customModule="care_bears" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HIn-bD-C04">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znh-SC-lwP">
-                                <rect key="frame" x="604" y="276" width="320" height="216"/>
-                            </pickerView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Znh-SC-lwP" secondAttribute="trailing" constant="100" id="C1o-4w-XoG"/>
-                            <constraint firstItem="Znh-SC-lwP" firstAttribute="centerY" secondItem="HIn-bD-C04" secondAttribute="centerY" id="Jpe-1o-FvX"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6T0-66-hl2"/>
-                    </view>
-                    <connections>
-                        <outlet property="tasksPicker" destination="Znh-SC-lwP" id="a5S-Ko-evY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wlL-hZ-rAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="712.5" y="14.84375"/>
-        </scene>
     </scenes>
     <resources>
+        <image name="Charlotte Hospital logo" width="277" height="79"/>
         <image name="background-dark-texture" width="6000" height="4000"/>
         <image name="eye-scanner" width="170" height="120"/>
     </resources>
