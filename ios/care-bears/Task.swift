@@ -52,10 +52,12 @@ class Task {
     
     func calcColor() {
         // one day in seconds = 86400
-        let fraction = (self.timeLeft / 86400)
+        print(self.timeLeft)
+        let fraction = ((86400 - self.timeLeft) / 86400)
         var index = Int((fraction * 5).rounded(.down))
         if index > 4 { index = 4 }
         if index < 0 { index = 0 }
+        print(index)
         self.color = possibleColors[index]
     }
     

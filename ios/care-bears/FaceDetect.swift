@@ -34,6 +34,7 @@ class FaceDetect: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
     var delegate: FaceDetectDelegate?
     
     var isFaceInView = false
+    var framesFaceCenteredCount = 0
     
     lazy var sequenceRequestHandler = VNSequenceRequestHandler()
     
@@ -533,8 +534,14 @@ class FaceDetect: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
 //        print(faceObservation.boundingBox.midX, ", ", faceObservation.boundingBox.midY)
         
         // See if face is towards the middle of the screen
-        if (self.isFaceCenteredAndLarge(faceObservation: faceObservation)) {
-            self.captureImage()
+        if (self.isFaceCentered(faceObservation: faceObservation)) {
+            self.framesFaceCenteredCount += 1
+            if (self.framesFaceCenteredCount > 30) {
+                self.captureImage()
+            }
+//            print("face centered", self.framesFaceCenteredCount)
+        } else {
+            self.framesFaceCenteredCount = 0
         }
     }
     
@@ -543,9 +550,17 @@ class FaceDetect: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
             faceObservation.boundingBox.midX > 0.2 &&
                faceObservation.boundingBox.midX < 0.8 &&
                faceObservation.boundingBox.midY > 0.2 &&
-               faceObservation.boundingBox.midY < 0.8
-//               faceObservation.boundingBox.height > 0.35 &&
-//               faceObservation.boundingBox.width > 0.5
+               faceObservation.boundingBox.midY < 0.8 &&
+               faceObservation.boundingBox.height > 0.3 &&
+               faceObservation.boundingBox.width > 0.5
+    }
+    
+    func isFaceCentered(faceObservation: VNFaceObservation) -> Bool {
+        return
+            faceObservation.boundingBox.midX > 0.2 &&
+                faceObservation.boundingBox.midX < 0.8 &&
+                faceObservation.boundingBox.midY > 0.2 &&
+                faceObservation.boundingBox.midY < 0.8
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
@@ -557,12 +572,6 @@ class FaceDetect: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
         if let data = photo.fileDataRepresentation() {
             let image = UIImage(data: data)
             print("image size", image?.size);
-            
-//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let rekognizeViewController = storyBoard.instantiateViewController(withIdentifier: "rekognize") as! RekognizeController
-//            rekognizeViewController.image = image
-//
-//            self.present(rekognizeViewController, animated: true, completion: nil)
             
             self.delegate?.didDetectFaceInCenter(self, selfie: image!)
         }

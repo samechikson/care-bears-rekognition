@@ -18,7 +18,7 @@ class WebServer {
     init() {
         self.server = HttpServer()
         self.server["/taskDone"] = { request in
-            print("Captured HTTP call to /taskDone")
+            print("Captured HTTP call to /taskDone with request", request.queryParams)
             DispatchQueue.main.async {
                 self.delegate?.taskDone(self)
             }

@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, FaceDetectDelegate, RekognizeDelegate, WebServerDelegate {
-
     @IBOutlet weak var timeDisplay: UILabel!
     @IBOutlet weak var backgroundTintView: UIView!
     @IBOutlet weak var tasksPicker: UIPickerView!
@@ -22,18 +21,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var popoverVC: UIViewController!
     var popoverLabel: UILabel!
     
+    let displayDateFormatString = "HH:mm"
+    let displayDateFormatter = DateFormatter()
+    
     var faceDetection: FaceDetect!
     var rekognition: Rekognize!
     var lambda: Lambda!
-    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.166:5000/handsanitizer")
+    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.163.194:5000/handsanitizer")
 //    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.228:3000/handsanitizer")
     
     var webServer: WebServer!
 
     var tasks: [Task] = [
-        Task(title: "IV Line Change", dueDate: Date().addingTimeInterval(1000)),
-        Task(title: "IV Line Change 2", dueDate: Date().addingTimeInterval(2000)),
-        Task(title: "IV Line Change 3", dueDate: Date().addingTimeInterval(2000))
+        Task(title: "IV Line Change", dueDate: Date().addingTimeInterval(100)),
+        Task(title: "IV Line Change 2", dueDate: Date().addingTimeInterval(500)),
+        Task(title: "IV Line Change 3", dueDate: Date().addingTimeInterval(3000)),
+        Task(title: "IV Line Change 4", dueDate: Date().addingTimeInterval(5000))
     ]
     
     override func viewDidLoad() {
@@ -61,6 +64,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.webServer = WebServer()
         self.webServer.delegate = self
+        
+        self.displayDateFormatter.dateFormat = self.displayDateFormatString
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -73,6 +78,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func initGauge() {
         self.gauge.path = UIBezierPath(rect: CGRect(x: 0, y: -150, width: 10, height: 300)).cgPath
+        self.gauge.fillColor = tasks[0].color.cgColor
+        self.gauge.shadowColor = self.tasks[0].color.cgColor
         self.gauge.shadowOffset = .zero
         self.gauge.shadowRadius = 5
         self.gauge.shadowOpacity = 0.85
@@ -148,15 +155,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func animateDetailsIn() {
-//        self.lambda.fetchTasks { (tasks) in
-//            self.tasks = tasks
-//            DispatchQueue.main.async {
-//                self.tasksPicker.reloadAllComponents()
-//                self.gauge.fillColor = self.tasks[0].color.cgColor
-//                self.gauge.shadowColor = self.tasks[0].color.cgColor
-//            }
-//        }
-//
         UIView.animate(withDuration: 1, animations: {
             self.timeDisplay.frame.origin.x -= 250
             self.timeDisplay.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
@@ -206,10 +204,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return tasks[row].title
-    }
-    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return tasks.count
     }
@@ -224,7 +218,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        let titleData = tasks[row].title
+        let titleData = self.displayDateFormatter.string(from: tasks[row].dueDate) + " - " + tasks[row].title
         let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34), NSAttributedString.Key.foregroundColor:UIColor.white])
         pickerLabel.attributedText = myTitle
         pickerLabel.textAlignment = .left
@@ -234,9 +228,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("picked \(tasks[row].title)!")
-        
-        self.gauge.fillColor = tasks[row].color.cgColor
-        self.gauge.shadowColor = self.tasks[0].color.cgColor
     }
 
 }
