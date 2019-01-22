@@ -36,10 +36,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var webServer: WebServer!
 
     var tasks: [Task] = [
-        Task(title: "IV Line Change", dueDate: Date().addingTimeInterval(100)),
-        Task(title: "IV Line Change 2", dueDate: Date().addingTimeInterval(500)),
-        Task(title: "IV Line Change 3", dueDate: Date().addingTimeInterval(3000)),
-        Task(title: "IV Line Change 4", dueDate: Date().addingTimeInterval(5000))
+        Task(title: "Change wound dressing", dueDate: Date().addingTimeInterval(-100000)),
+        Task(title: "Electrocardiogram test", dueDate: Date().addingTimeInterval(-50000)),
+        Task(title: "Echocardiogram test", dueDate: Date().addingTimeInterval(-10000)),
+        Task(title: "Install IV line", dueDate: Date().addingTimeInterval(300)),
+        Task(title: "Change wound dressing", dueDate: Date().addingTimeInterval(600)),
+        Task(title: "X-ray: chest area", dueDate: Date().addingTimeInterval(28000)),
+        Task(title: "CPK test", dueDate: Date().addingTimeInterval(30000)),
+        Task(title: "Change wound dressing", dueDate: Date().addingTimeInterval(310000))
     ]
     
     override func viewDidLoad() {
@@ -70,6 +74,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.hospitalLogoInitialPosition = CGPoint(x: self.hospitalLogo.center.x, y: self.hospitalLogo.center.y)
         self.roomNumberLabelInitialPosition = CGPoint(x: self.roomNumberLabel.center.x, y: self.roomNumberLabel.center.y)
+        
+        self.tasksPicker.selectRow(3, inComponent: 0, animated: false)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -82,8 +88,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func initGauge() {
         self.gauge.path = UIBezierPath(rect: CGRect(x: 0, y: -150, width: 10, height: 300)).cgPath
-        self.gauge.fillColor = tasks[0].color.cgColor
-        self.gauge.shadowColor = self.tasks[0].color.cgColor
+        self.gauge.fillColor = tasks[3].color.cgColor
+        self.gauge.shadowColor = self.tasks[3].color.cgColor
         self.gauge.shadowOffset = .zero
         self.gauge.shadowRadius = 5
         self.gauge.shadowOpacity = 0.85
@@ -240,6 +246,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("picked \(tasks[row].title)!")
+        self.gauge.fillColor = tasks[row].color.cgColor
+        self.gauge.shadowColor = self.tasks[row].color.cgColor
     }
 
 }

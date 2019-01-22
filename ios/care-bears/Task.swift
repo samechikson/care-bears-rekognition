@@ -53,6 +53,10 @@ class Task {
     func calcColor() {
         // one day in seconds = 86400
         print(self.timeLeft)
+        if (self.timeLeft < 0) {
+            self.color = UIColor(red: 2/255, green: 166/255, blue: 118/255, alpha: 1)
+            return
+        }
         let fraction = ((86400 - self.timeLeft) / 86400)
         var index = Int((fraction * 5).rounded(.down))
         if index > 4 { index = 4 }
