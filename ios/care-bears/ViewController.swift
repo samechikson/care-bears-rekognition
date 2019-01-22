@@ -26,7 +26,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var faceDetection: FaceDetect!
     var rekognition: Rekognize!
-    var lambda: Lambda!
     let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.163.194:5000/handsanitizer")
 //    let handSanitizerRPi = RaspberryPiConnect(connectionString: "http://192.168.1.228:3000/handsanitizer")
     @IBOutlet weak var hospitalLogo: UIImageView!
@@ -63,8 +62,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         self.rekognition = Rekognize()
         self.rekognition.delegate = self
-        
-        self.lambda = Lambda()
         
         self.webServer = WebServer()
         self.webServer.delegate = self
@@ -138,9 +135,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print("Recognized \(name) with confidence \(confidence)")
         self.userName.text = name
         
-        self.popoverVC.dismiss(animated: true, completion: nil)
+        self.popoverVC.dismiss(animated: false, completion: nil)
         self.animateDetailsIn()
-        self.lambda.checkIn()
+//        self.lambda.checkIn()
     }
     
     func didNotRecognizeFace(_ sender: Rekognize) {
@@ -163,7 +160,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func animateDetailsIn() {
         UIView.animate(withDuration: 1, animations: {
-            self.timeDisplay.frame.origin.x -= 250
+            self.view.layoutIfNeeded()
+
+            self.timeDisplay.center.x -= 250
             self.timeDisplay.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             self.backgroundTintView.alpha = 1
             
