@@ -57,7 +57,7 @@ class Task {
             self.color = UIColor(red: 2/255, green: 166/255, blue: 118/255, alpha: 1)
             return
         }
-        let fraction = ((86400 - self.timeLeft) / 86400)
+        let fraction = ((2000 - self.timeLeft) / 2000)
         var index = Int((fraction * 5).rounded(.down))
         if index > 4 { index = 4 }
         if index < 0 { index = 0 }

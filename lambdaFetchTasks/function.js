@@ -1,5 +1,5 @@
 const { Client } = require('pg')
-const connectionString = 'postgres://root:careb3ars@iotdatabase.c9a0to4gswgm.us-east-1.rds.amazonaws.com:5432/iot'
+const connectionString = 'postgres://test:test@localhost:5432/iot'
 
 exports.handler = async function (event, context, callback) {
   const client = new Client({

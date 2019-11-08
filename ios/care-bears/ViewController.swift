@@ -154,6 +154,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func taskDone(_ sender: WebServer) {
         self.tasksPicker.selectRow(self.tasksPicker.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: true)
+        self.gauge.fillColor = tasks[self.tasksPicker.selectedRow(inComponent: 0) + 1].color.cgColor
+        self.gauge.shadowColor = self.tasks[self.tasksPicker.selectedRow(inComponent: 0) + 1].color.cgColor
     }
     
     @IBAction func logIn(_ sender: Any) {
