@@ -3,3 +3,7 @@
 **/node_modules/
 **.zip
 XcodeSigner*
+log/
+__pycache/
+*.pyc
+nohup.out
